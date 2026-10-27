@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="profile.jpg" alt="Zahirul Islam" width="130" style="border-radius:50%">
+<img src="IMG20260903133710.jpg" alt="Zahirul Islam Zohir" width="130" style="border-radius:50%">
 
 # 📱 Zohir Mockup
 
