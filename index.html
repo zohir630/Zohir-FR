@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zohir Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5f8;--card:#fff;--tx:#14151a;--mu:#8a8f9b;--ac:#e0307c;--bd:#e8e9ef;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0e12;--card:#17181e;--tx:#eef0f4;--mu:#9aa0ad;--bd:#262833}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:"Hind Siliguri",system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+button{font:inherit;color:inherit;cursor:pointer}
+#top{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;position:relative}
+#top h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+.ib{width:40px;height:40px;border-radius:14px;border:1px solid var(--bd);background:var(--card);display:flex;align-items:center;justify-content:center;padding:0}
+#ok{position:relative;overflow:hidden;min-width:40px;height:40px;padding:0 10px;border:0;border-radius:14px;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:13px}
+#ok i{position:absolute;inset:0 auto 0 0;width:0;background:rgba(0,0,0,.28);transition:width .2s linear}
+#ok>*{position:relative}
+#ok:disabled{opacity:.6}
+#menu{position:absolute;top:56px;left:14px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.15);z-index:5;display:none;min-width:170px}
+#menu.on{display:block}
+#menu button{display:block;width:100%;text-align:left;background:none;border:0;padding:10px 12px;border-radius:10px;font-size:14px}
+#menu button:active{background:var(--bg)}
+.pg{display:none;flex:1;min-height:0;flex-direction:column}
+.pg.on{display:flex}
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 14px;position:relative}
+canvas{max-width:100%;max-height:100%;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.16);cursor:pointer}
+#st{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:11.5px;background:var(--card);border:1px solid var(--bd);color:var(--mu);padding:3px 12px;border-radius:20px;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
+#sheet{margin:6px 12px 0;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:8px 6px 10px}
+#sub{display:flex;gap:6px;padding:0 6px 8px}
+#sub button{flex:1;border:0;background:var(--bg);color:var(--mu);border-radius:12px;padding:7px 0;font-size:12.5px;font-weight:600}
+#sub button.on{background:var(--tx);color:var(--bg)}
+.pn{display:none;flex-direction:column;gap:8px}
+.pn.on{display:flex}
+.row{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;align-items:center;padding:2px 6px}
+.row::-webkit-scrollbar{display:none}
+.ch{flex:0 0 auto;border:1px solid var(--bd);background:var(--bg);border-radius:12px;padding:6px 12px;font-size:12.5px;line-height:1.25;text-align:center}
+.ch small{display:block;font-size:10px;color:var(--mu)}
+.ch.on{border-color:var(--ac);background:var(--ac);color:#fff}
+.ch.on small{color:#ffe0ee}
+.sw{flex:0 0 auto;width:36px;height:36px;border-radius:12px;border:2px solid var(--bd);padding:0}
+.sw.c{border-radius:50%;width:30px;height:30px}
+.sw.on{outline:3px solid var(--ac);outline-offset:2px}
+.in{width:100%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;margin:0 6px;flex:1 1 0;min-width:0}
+.fld{display:flex;flex-direction:column;gap:8px;padding:4px 6px}
+.fld .in{margin:0;flex:none}
+#nav{display:flex;margin:8px 12px 10px;background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:5px;gap:4px}
+#nav button{flex:1;border:0;background:none;color:var(--mu);border-radius:17px;padding:7px 0;font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px}
+#nav button.on{background:var(--ac);color:#fff}
+.sc{overflow:auto;padding:6px 14px 14px}
+.sc h2{font-size:16px;margin:8px 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cd{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:8px}
+.cd img,.cd video{width:100%;border-radius:10px;display:block;max-height:240px;object-fit:contain;background:var(--bg)}
+.cd a{text-align:center;background:var(--ac);color:#fff;border-radius:10px;padding:7px;font-size:13px;font-weight:600;text-decoration:none}
+.em{color:var(--mu);text-align:center;margin-top:50px;font-size:14px}
+#md{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9;padding:24px}
+#md.on{display:flex}
+#md div{background:var(--card);border-radius:20px;padding:18px;max-width:340px;width:100%}
+#md h3{margin:0 0 8px}
+#md p{margin:0 0 14px;color:var(--mu);font-size:14px;line-height:1.5;white-space:pre-line}
+#md button{width:100%;border:0;background:var(--ac);color:#fff;border-radius:12px;padding:9px;font-weight:700}
+input[type=file]{display:none}
+</style>
+</head>
+<body>
+<div id="top">
+ <button class="ib" id="mn" aria-label="মেনু"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></button>
+ <h1>Zohir Mockup</h1>
+ <button id="ok" aria-label="সেভ"><i id="fill"></i><svg viewBox="0 0 24 24" id="tk"><path d="M5 12l5 5 9-10"/></svg><b id="dt"></b></button>
+ <div id="menu"><button data-m="about">ℹ️ আমাদের সম্পর্কে</button><button data-m="contact">✉️ যোগাযোগ</button><button data-m="how">💡 কীভাবে ব্যবহার করবে</button></div>
+</div>
+
+<div class="pg on" id="pg-home">
+ <div id="stage"><canvas id="cv"></canvas><div id="st">ফোনের স্ক্রিনে ট্যাপ করে ছবি বা ভিডিও দাও</div></div>
+ <div id="sheet">
+  <div id="sub"><button class="on">টেমপ্লেট</button><button>লেখা</button><button>ফোন</button><button>রং</button></div>
+  <div class="pn on"><div class="row" id="r-tp"></div></div>
+  <div class="pn"><div class="fld"><input class="in" id="l1" placeholder="লাইন ১ (কালো)"><input class="in" id="l2" placeholder="লাইন ২ (রঙিন)"><textarea class="in" id="sb" rows="2" placeholder="ছোট লেখা"></textarea></div><div class="row" id="r-ac"></div></div>
+  <div class="pn"><div class="row" id="r-dev"></div><div class="row" id="r-fr"></div></div>
+  <div class="pn"><div class="row" id="r-bg"></div></div>
+ </div>
+</div>
+
+<div class="pg" id="pg-done"><div class="sc"><h2>✅ কমপ্লিট করা ডিজাইন</h2><div class="grid" id="dn"></div><div class="em" id="dem">এখনো কিছু সেভ করা হয়নি।<br>হোম থেকে ✓ চাপলে এখানে জমা হবে।</div></div></div>
+
+<div class="pg" id="pg-prof"><div class="sc"><h2>👤 প্রোফাইল</h2><div class="fld">
+ <label>ব্র্যান্ড নাম<input class="in" id="pb"></label>
+ <label>ওয়েবসাইট (ডিজাইনে দেখাবে)<input class="in" id="pw"></label>
+ <label>ফেসবুক / ফুটার লেখা<input class="in" id="pf"></label>
+ <p style="color:var(--mu);font-size:12px;margin:0">এগুলো ফোনেই সেভ থাকে এবং সব টেমপ্লেটে বসে যায়।</p></div></div></div>
+
+<div id="nav">
+ <button class="on" data-p="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>হোম</button>
+ <button data-p="done"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>কমপ্লিট</button>
+ <button data-p="prof"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>প্রোফাইল</button>
+</div>
+<div id="md"><div><h3 id="mt"></h3><p id="mb"></p><button id="mc">ঠিক আছে</button></div></div>
+<input type="file" id="f" accept="image/*,video/*">
+
+<script>
+var DV=[['iPhone 18 Pro Max','i',440,956,64,104,32],['iPhone 17 Pro Max','i',440,956,62,116,34],['iPhone 16 Pro Max','i',440,956,62,120,35],['iPhone 15 Pro Max','i',430,932,55,120,35],['iPhone 14 Pro Max','i',430,932,55,120,35],['Galaxy S25 Ultra','a',412,892,26,0,0],['Pixel 9 Pro','a',412,915,48,0,0]];
+var TP=[['নোটিফিকেশন','৪:৫',1080,1350,'a'],['স্টোরি টিল্ট','৯:১৬',1080,1920,'b'],['ডাবল স্ক্রিন','১:১',1080,1080,'c'],['সাইড টেক্সট','১:১',1080,1080,'d'],['ক্লাসিক','৯:১৬',1080,1920,'e'],['ক্লাসিক','৪:৫',1080,1350,'e'],['ক্লাসিক','১:১',1080,1080,'e'],['ক্লাসিক','১৬:৯',1920,1080,'e']];
+var BG=[null,['#ffffff','#e9eaf0'],['#ff9a9e','#fad0c4'],['#667eea','#764ba2'],['#0f2027','#2c5364'],['#f6d365','#fda085'],['#43e97b','#38f9d7'],['#111111','#434343'],['#fbc2eb','#a6c1ee']];
+var AC=['#e0307c','#4f46e5','#0ea5e9','#16a34a','#f59e0b','#ef4444','#14151a'];
+var FR=['#1c1c1f','#d8d9dc','#b9ada0','#3b4a5f','#c9a98a','#f3f3f1'];
+var FF='"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif';
+var ti=0,di=0,bi=0,ac_='#e0307c',fr=FR[0],sc=1,dirty=true,rec=false,cur=0,slots=[null,null],hits=[],done=[],ax,gn,dest;
+var P={b:'Zohir',w:'yoursite.com',f:'facebook.com/yourpage'};
+try{var sv=JSON.parse(localStorage.getItem('zm')||'null');if(sv)P=sv}catch(e){}
+var cv=document.getElementById('cv'),x=cv.getContext('2d');
+var $=function(i){return document.getElementById(i)};
+var bn=function(n){return Number(n).toLocaleString('bn-BD')};
+var W=1080,H=1350;
+function setC(){var o=TP[ti];W=o[2];H=o[3];cv.width=W*sc;cv.height=H*sc;dirty=true}
+function rr(a,b,w,h,r){x.beginPath();x.roundRect(a,b,w,h,r)}
+function lum(h){var n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))/255}
+function T(s,X,Y,z,c,a,w){if(!s)return;x.font=(w||700)+' '+z+'px '+FF;x.fillStyle=c;x.textAlign=a||'center';x.textBaseline='alphabetic';String(s).split('\n').forEach(function(l,i){x.fillText(l,X,Y+i*z*1.22)})}
+function pill(X,Y,left,tc){
+ x.font='500 30px '+FF;var tw=x.measureText(P.w).width,pw=tw+120,L=left?X:X-pw/2;
+ x.lineWidth=3;x.strokeStyle=tc;rr(L,Y,pw,64,32);x.stroke();
+ T(P.w,L+34,Y+43,30,tc,'left',500);
+ x.beginPath();x.arc(L+pw-46,Y+30,10,0,7);x.stroke();x.beginPath();x.moveTo(L+pw-39,Y+37);x.lineTo(L+pw-32,Y+44);x.stroke();
+}
+function media(i,d,b){
+ var m=slots[i],el=m&&m.el,w=el&&(el.naturalWidth||el.videoWidth);
+ if(el&&w&&(m.v?el.readyState>1:el.complete)){
+  var h=el.naturalHeight||el.videoHeight,k=Math.max(d[2]/w,d[3]/h),vw=w*k,vh=h*k;
+  x.imageSmoothingQuality='high';x.drawImage(el,b+(d[2]-vw)/2,b+(d[3]-vh)/2,vw,vh);
+ }else{
+  x.fillStyle='#17181c';x.fillRect(b,b,d[2],d[3]);
+  x.textAlign='center';x.fillStyle='#8b90a0';x.font='300 70px system-ui';x.fillText('+',b+d[2]/2,b+d[3]/2);
+  x.font='22px '+FF;x.fillText('ছবি / ভিডিও দাও',b+d[2]/2,b+d[3]/2+40);
+ }
+}
+function phone(cx,top,w,rot,i){
+ var d=DV[di],b=d[1]=='i'?11:9,fw=d[2]+2*b,fh=d[3]+2*b,s=w/fw;
+ x.save();x.translate(cx,top+fh*s/2);x.rotate(rot);x.scale(s,s);x.translate(-fw/2,-fh/2);
+ if(sc==1)hits[i]={m:x.getTransform(),d:d,b:b};
+ x.fillStyle=fr;
+ [[-3,150,4,40],[-3,215,4,70],[-3,300,4,70],[fw-1,240,4,100]].forEach(function(k){x.fillRect(k[0],k[1],k[2],k[3])});
+ x.shadowColor='rgba(0,0,0,.3)';x.shadowBlur=50;x.shadowOffsetY=18;
+ rr(0,0,fw,fh,d[4]+b);x.fill();x.shadowColor='transparent';
+ x.lineWidth=3;x.strokeStyle='rgba(255,255,255,.28)';x.stroke();
+ x.save();rr(b,b,d[2],d[3],d[4]);x.fillStyle='#000';x.fill();x.clip();media(i,d,b);x.restore();
+ x.fillStyle='#000';
+ if(d[1]=='i'){rr((fw-d[5])/2,b+11,d[5],d[6],d[6]/2);x.fill()}else{x.beginPath();x.arc(fw/2,b+17,8,0,7);x.fill()}
+ x.restore();
+}
+function render(){
+ var o=TP[ti],k=o[4],g=BG[bi],tc='#14151a',A=ac_;hits=[];
+ x.setTransform(sc,0,0,sc,0,0);
+ if(g){var gr=x.createLinearGradient(0,0,W,H);gr.addColorStop(0,g[0]);gr.addColorStop(1,g[1]);x.fillStyle=gr;if((lum(g[0])+lum(g[1]))/2<.45)tc='#ffffff'}
+ else x.fillStyle=k=='e'?'#eef0f6':'#f3f3f5';
+ x.fillRect(0,0,W,H);
+ var l1=$('l1').value,l2=$('l2').value,sb=$('sb').value;
+ if(k=='a'){
+  x.fillStyle=A;x.beginPath();x.arc(990,110,36,0,7);x.fill();T((P.b||'Z')[0],990,124,40,'#fff');
+  T(l1,W/2,330,120,tc);T(l2,W/2,470,120,A);
+  phone(620,640,720,0,0);
+  x.save();x.translate(1032,900);x.rotate(-Math.PI/2);T(P.w,0,0,40,tc,'center',500);x.restore();
+  T(P.b,50,1240,44,tc,'left');T(P.f,50,1280,22,tc,'left',500);
+ }else if(k=='b'){
+  [[tc,1],[A,1],[A,.55]].forEach(function(c,i){x.globalAlpha=c[1];x.fillStyle=c[0];x.beginPath();x.arc(110,200+i*100,40,0,7);x.fill()});x.globalAlpha=1;
+  phone(900,120,900,-.13,0);
+  T(l2,60,1560,92,A,'left');T(l1,60,1670,92,tc,'left');T(P.b+' | '+P.f,60,1790,30,tc,'left',500);
+ }else if(k=='c'){
+  x.fillStyle='rgba(128,128,128,.12)';[[60,150,230],[600,90,270],[1010,280,230],[120,720,260]].forEach(function(c){x.beginPath();x.arc(c[0],c[1],c[2],0,7);x.fill()});
+  T(l2,W/2,235,118,A);T(l1,W/2,350,96,tc);pill(W/2,420,0,tc);
+  phone(320,640,560,0,0);phone(770,590,560,0,1);
+ }else if(k=='d'){
+  T(l1,60,230,74,tc,'left');T(l2,60,370,120,A,'left');
+  if(sb){x.save();x.shadowColor='rgba(0,0,0,.15)';x.shadowBlur=30;x.shadowOffsetY=10;x.fillStyle='#fff';rr(60,470,470,230,26);x.fill();x.restore();T(sb,92,555,32,'#14151a','left',600)}
+  pill(60,800,1,tc);T(P.b,60,990,40,tc,'left');
+  phone(830,60,480,0,0);
+ }else{
+  var land=W>H,fh=DV[di][3]+22,fw=DV[di][2]+22,txt=(l1||l2)&&!land,ph=H*(land?.9:txt?.68:.88),pw=ph*fw/fh;
+  if(txt){T(l1,W/2,H*.1,84,tc);T(l2,W/2,H*.1+100,84,A)}
+  phone(W/2,txt?H*.24:H*.06,pw,0,0);
+ }
+ if(k!='d'&&k!='e'&&sb)T(sb,W/2,H-50,30,tc,'center',500);
+ dirty=false;
+}
+function vids(){return slots.filter(function(m){return m&&m.v}).map(function(m){return m.el})}
+(function loop(){if(dirty||rec||vids().length)render();requestAnimationFrame(loop)})();
+document.fonts&&document.fonts.load('700 40px "Hind Siliguri"').then(function(){dirty=true});
+
+function chips(id,list,fn,html){list.forEach(function(it,i){var e=document.createElement('button');e.className='ch'+(i?'':' on');e.innerHTML=html(it);e.onclick=function(){fn(i);[].forEach.call($(id).children,function(c,j){c.classList.toggle('on',j==i)});dirty=true};$(id).appendChild(e)})}
+function sws(id,list,fn,bg,cls){list.forEach(function(it,i){var e=document.createElement('button');e.className='sw '+cls+(i?'':' on');e.style.background=bg(it);e.onclick=function(){fn(i);[].forEach.call($(id).children,function(c,j){c.classList.toggle('on',j==i)});dirty=true};$(id).appendChild(e)})}
+chips('r-tp',TP,function(i){ti=i;setC()},function(t){return t[0]+'<small>'+t[1]+'</small>'});
+chips('r-dev',DV,function(i){di=i},function(d){return d[0].replace(/^(iPhone|Galaxy|Pixel)\s/,'<small>$1</small>')});
+sws('r-ac',AC,function(i){ac_=AC[i]},function(c){return c},'c');
+sws('r-fr',FR,function(i){fr=FR[i]},function(c){return c},'c');
+sws('r-bg',BG,function(i){bi=i},function(g){return g?'linear-gradient(135deg,'+g[0]+','+g[1]+')':'repeating-linear-gradient(45deg,#ddd 0 6px,#fff 6px 12px)'},'');
+['l1','l2','sb'].forEach(function(n){$(n).oninput=function(){dirty=true}});
+$('l1').value='সকল আপডেট';$('l2').value='সবার আগে';$('sb').value='এখানে ছোট লেখা লিখুন';
+
+[].forEach.call(document.querySelectorAll('#sub button'),function(b,i){b.onclick=function(){[].forEach.call(document.querySelectorAll('#sub button'),function(c,j){c.classList.toggle('on',j==i)});[].forEach.call(document.querySelectorAll('#sheet .pn'),function(p,j){p.classList.toggle('on',j==i)})}});
+[].forEach.call(document.querySelectorAll('#nav button'),function(b){b.onclick=function(){
+ [].forEach.call(document.querySelectorAll('#nav button'),function(c){c.classList.toggle('on',c==b)});
+ [].forEach.call(document.querySelectorAll('.pg'),function(p){p.classList.toggle('on',p.id=='pg-'+b.dataset.p)});
+ $('ok').style.visibility=b.dataset.p=='home'?'visible':'hidden';dirty=true}});
+
+var pf={pb:'b',pw:'w',pf:'f'};
+Object.keys(pf).forEach(function(i){$(i).value=P[pf[i]];$(i).oninput=function(){P[pf[i]]=$(i).value;dirty=true;try{localStorage.setItem('zm',JSON.stringify(P))}catch(e){}}});
+
+function modal(t,b){$('mt').textContent=t;$('mb').textContent=b;$('md').classList.add('on')}
+$('mc').onclick=function(){$('md').classList.remove('on')};
+$('mn').onclick=function(e){e.stopPropagation();$('menu').classList.toggle('on')};
+document.onclick=function(){$('menu').classList.remove('on')};
+[].forEach.call(document.querySelectorAll('#menu button'),function(b){b.onclick=function(){
+ var m=b.dataset.m;
+ if(m=='about')modal('Zohir Mockup','ফোনের ফ্রেমে ছবি বা ভিডিও বসিয়ে প্রমো পোস্ট, স্টোরি আর রিলস ডিজাইন বানানোর অ্যাপ।');
+ else if(m=='contact')modal('যোগাযোগ',P.b+'\n'+P.w+'\n'+P.f);
+ else modal('কীভাবে ব্যবহার করবে','১. টেমপ্লেট বেছে নাও।\n২. ফোনের স্ক্রিনে ট্যাপ করে ছবি বা ভিডিও দাও।\n৩. লেখা, ফোন আর রং বদলাও।\n৪. উপরের ✓ চাপলে সেভ হবে।')}});
+
+$('f').onchange=function(e){
+ var f=e.target.files[0];if(!f)return;
+ var u=URL.createObjectURL(f),v=f.type.indexOf('video')==0,el=document.createElement(v?'video':'img');
+ if(v){el.muted=true;el.loop=true;el.playsInline=true;el.src=u;el.onloadeddata=function(){el.play().catch(function(){});dirty=true}}
+ else{el.onload=function(){dirty=true};el.src=u}
+ slots[cur]={el:el,v:v};e.target.value='';$('st').textContent=v?'ভিডিও যোগ হয়েছে, ✓ চাপলে সেভ হবে':'ছবি যোগ হয়েছে, ✓ চাপলে সেভ হবে';
+};
+cv.onclick=function(e){
+ var r=cv.getBoundingClientRect(),px=(e.clientX-r.left)*cv.width/r.width,py=(e.clientY-r.top)*cv.height/r.height;
+ for(var i=hits.length-1;i>=0;i--){var h=hits[i];if(!h)continue;var p=h.m.inverse().transformPoint(new DOMPoint(px,py));
+  if(p.x>=h.b&&p.x<=h.b+h.d[2]&&p.y>=h.b&&p.y<=h.b+h.d[3]){cur=i;$('f').click();return}}
+};
+
+function addDone(blob,ext){
+ var u=URL.createObjectURL(blob),n='zohir-mockup-'+(done.length+1)+'.'+ext;
+ done.unshift({u:u,e:ext,n:n});
+ $('dem').style.display='none';
+ $('dn').innerHTML=done.map(function(d){return '<div class="cd">'+(d.e=='png'?'<img src="'+d.u+'">':'<video src="'+d.u+'" controls playsinline muted></video>')+'<a href="'+d.u+'" download="'+d.n+'">ডাউনলোড</a></div>'}).join('');
+ var a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();
+}
+function initA(){if(ax)return;ax=new (window.AudioContext||window.webkitAudioContext)();gn=ax.createGain();dest=ax.createMediaStreamDestination();gn.connect(ax.destination)}
+function wire(v){if(v._w)return;var s=ax.createMediaElementSource(v);s.connect(gn);s.connect(dest);v._w=1}
+
+$('ok').onclick=async function(){
+ if(rec)return;
+ var vs=vids(),btn=$('ok');
+ if(!vs.length){
+  sc=2;setC();render();
+  var bl=await new Promise(function(r){cv.toBlob(r,'image/png')});
+  sc=1;setC();addDone(bl,'png');$('st').textContent='ছবি সেভ হয়েছে ✓ কমপ্লিট ট্যাবে দেখো';return;
+ }
+ if(!window.MediaRecorder){$('st').textContent='এই ব্রাউজারে ভিডিও সেভ হবে না, Chrome ব্যবহার করো';return}
+ initA();await ax.resume();rec=true;btn.disabled=true;
+ vs.forEach(function(v){wire(v);v.muted=false;v.pause()});gn.gain.value=0;
+ var lead=vs.reduce(function(a,b){return b.duration>a.duration?b:a});
+ await Promise.all(vs.map(function(v){return v.currentTime>.01?new Promise(function(r){v.onseeked=r;v.currentTime=0}):0}));
+ vs.forEach(function(v){v.onseeked=null;v.loop=v!==lead});
+ render();await new Promise(function(r){requestAnimationFrame(function(){requestAnimationFrame(r)})});
+ var stream=cv.captureStream(30),t=dest.stream.getAudioTracks()[0];if(t)stream.addTrack(t);
+ var mt=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'].filter(function(m){return MediaRecorder.isTypeSupported(m)})[0]||'';
+ var bps=Math.min(40e6,Math.max(8e6,W*H*30*.2)),ch=[];
+ var mr=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:bps}:{videoBitsPerSecond:bps});
+ mr.ondataavailable=function(e){if(e.data.size)ch.push(e.data)};
+ mr.onstop=function(){
+  vs.forEach(function(v){v.loop=true;v.muted=true;v.ontimeupdate=null;v.onended=null;v.currentTime=0;v.play().catch(function(){})});
+  gn.gain.value=1;rec=false;btn.disabled=false;
+  $('fill').style.width='0';$('dt').textContent='';$('tk').style.display='';
+  addDone(new Blob(ch,{type:mt||'video/webm'}),mt.indexOf('mp4')>-1?'mp4':'webm');
+  $('st').textContent='ভিডিও সেভ হয়েছে ✓ কমপ্লিট ট্যাবে দেখো';
+ };
+ $('tk').style.display='none';$('st').textContent='রেকর্ড হচ্ছে, ট্যাব খোলা রাখো...';
+ lead.ontimeupdate=function(){var p=lead.currentTime/lead.duration;$('fill').style.width=(p*100)+'%';$('dt').textContent=bn(Math.min(99,Math.floor(p*100)))+'%'};
+ lead.onended=function(){setTimeout(function(){mr.stop()},200)};
+ mr.start();vs.forEach(function(v){v.play()});
+};
+setC();
+</script>
+</body>
+</html>
